@@ -7,7 +7,7 @@
     "example"
   ],
   "scripts": {
-    "build": "npm run build -w pg-describe",
+    "build": "npm run build -w pg-describe && npm rebuild pg-describe",
     "typecheck": "npm run typecheck --workspaces",
     "test": "npm test -w pg-describe"
   },
