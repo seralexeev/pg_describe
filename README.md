@@ -185,7 +185,18 @@ steps:
 
 ## Editor
 
-VS Code with the TypeScript 7 extension runs content mappers in trusted workspaces. Turn them on or off with `js/ts.contentMappers.enabled`. The mapper ties each query's `@name` and each `:param` to the matching name in the generated types, so hover, go to definition and references can move between the `.sql` file and the TypeScript that uses it. SQL errors appear in the `.sql` file as you type.
+VS Code needs the [TypeScript 7 extension](https://marketplace.visualstudio.com/items?itemName=TypeScriptTeam.native-preview) running your project's TypeScript 7.1. The TypeScript that ships inside the extension is 7.0 and has no content mappers. Add this to `.vscode/settings.json`:
+
+```jsonc
+{
+  "js/ts.experimental.useTsgo": true,
+  "js/ts.tsdk.path": "node_modules/typescript"
+}
+```
+
+Then trust the workspace, and click **Allow** when the extension asks to use the workspace version. Content mappers run only in trusted workspaces, and `js/ts.contentMappers.enabled` turns them off.
+
+Once that is set up, hovering a query shows its parameters and row type. Completions list its columns. Go to definition jumps to the `@name` in the `.sql` file. SQL errors show up in the `.sql` file as you type.
 
 ## Documentation
 
