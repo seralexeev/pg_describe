@@ -2,6 +2,9 @@
 
 Import `.sql` files straight into TypeScript and get fully typed queries. Postgres itself checks them.
 
+<img width="1223" height="612" alt="image" src="https://github.com/user-attachments/assets/ac8c0a1f-aa79-45ce-8d3e-5a55c682fbda" />
+
+
 ```sql
 -- src/users.sql
 /* @name findUserByEmail */
