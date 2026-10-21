@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: ghcr.io/seralexeev/pg_describe:18
+    build: ..
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 54329:5432
+    volumes:
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro

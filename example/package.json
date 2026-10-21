@@ -1,0 +1,16 @@
+{
+  "name": "pg-describe-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --runExternalCode",
+    "dev": "node --import pg-describe/register-dev src/main.ts",
+    "start": "node --import pg-describe/register src/main.ts",
+    "lock": "pg-describe lock",
+    "lock:check": "pg-describe lock --check"
+  },
+  "dependencies": {
+    "pg": "8.23.1",
+    "pg-describe": "*"
+  }
+}

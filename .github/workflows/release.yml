@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        pg: ['18']
+    steps:
+      - uses: actions/checkout@v5
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Postgres with pg_describe
+        uses: docker/build-push-action@v6
+        with:
+          platforms: linux/amd64,linux/arm64
+          build-args: PG_MAJOR=${{ matrix.pg }}
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:${{ matrix.pg }}
+            ghcr.io/${{ github.repository }}:${{ matrix.pg }}-${{ github.ref_name }}
+      - name: Extension files only
+        uses: docker/build-push-action@v6
+        with:
+          platforms: linux/amd64,linux/arm64
+          build-args: PG_MAJOR=${{ matrix.pg }}
+          target: extension
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:${{ matrix.pg }}-extension
+            ghcr.io/${{ github.repository }}:${{ matrix.pg }}-extension-${{ github.ref_name }}
+
+  npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://registry.npmjs.org
+      - run: npm ci
+      - run: npm publish -w pg-describe --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.projects/
+packages/pg-describe/README.md
+packages/pg-describe/LICENSE
+packages/pg-describe/test/fixtures/pg-describe.lock.json

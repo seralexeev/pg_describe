@@ -1,0 +1,20 @@
+{
+  "name": "pg-describe-monorepo",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/pg-describe",
+    "example"
+  ],
+  "scripts": {
+    "build": "npm run build -w pg-describe",
+    "typecheck": "npm run typecheck --workspaces",
+    "test": "npm test -w pg-describe"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.5",
+    "@types/pg": "8.23.1",
+    "typescript": "7.1.0-beta",
+    "vitest": "5.0.5"
+  }
+}

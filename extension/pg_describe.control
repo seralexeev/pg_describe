@@ -1,0 +1,4 @@
+comment = 'Describes the parameter and column types and nullability of a SQL statement'
+default_version = '1.0'
+module_pathname = '$libdir/pg_describe'
+relocatable = true

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2024",
+    "module": "nodenext",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "types": ["node"]
+  },
+  "contentMappers": [
+    {
+      "package": "pg-describe",
+      "extensions": [".sql"],
+      "options": {
+        "database": "postgres://postgres:postgres@localhost:54329/postgres",
+        "schema": "db/*.sql"
+      }
+    }
+  ],
+  "include": ["src"]
+}

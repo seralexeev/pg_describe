@@ -1,0 +1,8 @@
+services:
+  postgres:
+    build: .
+    image: pg_describe:local
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 54329:5432

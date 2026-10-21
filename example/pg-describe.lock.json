@@ -1,0 +1,43 @@
+{
+  "identity": "79610e54694edc08",
+  "statements": {
+    "5e077640936b3d0b": {
+      "rows": "maybe",
+      "columns": [
+        "id",
+        "email",
+        "name",
+        "role"
+      ]
+    },
+    "7b2c1d233267c9b6": {
+      "rows": "one",
+      "columns": [
+        "id"
+      ],
+      "json": [
+        "meta"
+      ]
+    },
+    "d10593c30ffd86d4": {
+      "rows": "one",
+      "columns": [
+        "id",
+        "email",
+        "name",
+        "role",
+        "createdAt"
+      ]
+    },
+    "d47fa76d1330ca71": {
+      "rows": "many",
+      "columns": [
+        "id",
+        "title",
+        "tags",
+        "authorEmail",
+        "meta"
+      ]
+    }
+  }
+}

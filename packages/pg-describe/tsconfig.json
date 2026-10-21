@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "contentMappers": [
+    {
+      "package": "pg-describe",
+      "extensions": [".sql"],
+      "options": {
+        "database": "postgres://postgres:postgres@localhost:54329/postgres",
+        "schema": "test/fixtures/schema.sql",
+        "lock": "test/fixtures/pg-describe.lock.json"
+      }
+    }
+  ],
+  "include": ["src", "test", "vitest.config.ts"]
+}

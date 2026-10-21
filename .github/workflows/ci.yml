@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Start Postgres with pg_describe
+        run: docker compose up -d --build --wait
+      - run: npm ci
+      - run: npm run build
+      - run: npm run typecheck
+      - run: npm test
+      - name: Example
+        working-directory: example
+        run: |
+          docker compose -p pg_describe exec -T postgres psql -U postgres -q -v ON_ERROR_STOP=1 -f - < db/schema.sql
+          npm run typecheck
+          npm run lock:check
+          npm start

@@ -1,0 +1,64 @@
+{
+  "name": "pg-describe",
+  "version": "0.1.0",
+  "description": "Typed SQL files for TypeScript: a Postgres extension that describes statements, a TypeScript 7.1 content mapper and runtime loaders",
+  "license": "MIT",
+  "repository": "github:seralexeev/pg_describe",
+  "type": "module",
+  "engines": {
+    "node": ">=22.15"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "bin": {
+    "pg-describe": "./dist/cli.js"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./register": "./dist/register.js",
+    "./register-dev": "./dist/register_dev.js",
+    "./vite": "./dist/vite.js",
+    "./package.json": "./package.json"
+  },
+  "typescript": {
+    "contentMapper": {
+      "exec": [
+        "node",
+        "dist/mapper.js"
+      ],
+      "dynamicConfig": true
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && chmod +x dist/cli.js",
+    "typecheck": "npm run build && tsc --runExternalCode",
+    "test": "vitest run",
+    "prepack": "npm run build && cp ../../README.md ../../LICENSE ."
+  },
+  "dependencies": {
+    "pg": "8.23.1"
+  },
+  "peerDependencies": {
+    "typescript": ">=7.1.0-beta"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "keywords": [
+    "postgres",
+    "postgresql",
+    "sql",
+    "typescript",
+    "content-mapper",
+    "typed-sql",
+    "codegen",
+    "node-postgres"
+  ],
+  "author": "Sergey Alexeev",
+  "homepage": "https://github.com/seralexeev/pg_describe#readme"
+}
